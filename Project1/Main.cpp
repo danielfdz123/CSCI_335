@@ -7,8 +7,9 @@
 #include "Book.hpp"
 #include "MoveAll.hpp"
 
-int main(){
-  
+int main()
+{
+
   std::vector<Book> catalog, cart;
 
   // open file
@@ -31,41 +32,47 @@ int main(){
 
   // reads all 7 fields in each iteration and copies the value of each field into Book "temp"
   // pushes "temp" onto the back of "catalog" at the end of the iteration
-  while (getline(fin,line)){
+  while (getline(fin, line))
+  {
 
     // Title
-    if (!std::regex_search(line, match, title)){
+    if (!std::regex_search(line, match, title))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     temp.setTitle(match[2]);
 
     // Author
-    getline(fin,line);
-    if (!std::regex_search(line, match, author)){
+    getline(fin, line);
+    if (!std::regex_search(line, match, author))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     temp.setAuthor(match[2]);
 
     // ISBN
-    getline(fin,line);
-    if (!std::regex_search(line, match, ISBN)){
+    getline(fin, line);
+    if (!std::regex_search(line, match, ISBN))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     temp.setISBN(std::stoll(match[2]));
 
     // Icon
-    getline(fin,line);
-    if (!std::regex_search(line, match, icon)){
+    getline(fin, line);
+    if (!std::regex_search(line, match, icon))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     std::stringstream numstring(match[2]);
     int next_number;
-    int* numarray = new int[80];
-    for (int i=0 ; i<80; ++i){
+    int *numarray = new int[80];
+    for (int i = 0; i < 80; ++i)
+    {
       if (!(numstring >> next_number))
         std::cout << "Error reading file format" << std::endl;
       numarray[i] = next_number;
@@ -74,42 +81,46 @@ int main(){
     numarray = nullptr;
 
     // Price
-    getline(fin,line);
-    if (!std::regex_search(line, match, price)){
+    getline(fin, line);
+    if (!std::regex_search(line, match, price))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     temp.setPrice(std::stof(match[2]));
 
     // Keywords
-    getline(fin,line);
-    if (!std::regex_search(line, match, keywords)){
+    getline(fin, line);
+    if (!std::regex_search(line, match, keywords))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     std::stringstream keyword_string(match[2]);
     std::vector<std::string> keywords;
-    while (keyword_string){
+    while (keyword_string)
+    {
       std::string keyword;
-      if (!getline(keyword_string >> std::ws, keyword, ',' )) break;
+      if (!getline(keyword_string >> std::ws, keyword, ','))
+        break;
       keywords.push_back(keyword);
     }
     temp.setKeywords(keywords);
 
     // Blurb
-    getline(fin,line);
-    if (!std::regex_search(line, match, blurb)){
+    getline(fin, line);
+    if (!std::regex_search(line, match, blurb))
+    {
       std::cout << "Error reading file format" << std::endl;
       exit(1);
     }
     temp.setBlurb(match[2]);
 
-    getline(fin,line);  // skip line between entries
+    getline(fin, line); // skip line between entries
     catalog.push_back(temp);
-
   }
 
-  //Testing a single output yippie  
+  // // Testing a single output yippie
   // Book book1 = Book();
   // book1.setTitle("CS335");
   // book1.setAuthor("Eric Schewitzer");
@@ -123,28 +134,24 @@ int main(){
   // book1.setBlurb("Silly goose");
   // book1.print();
 
-
-  for(const Book& book2 : catalog)
+  for (const Book &book2 : catalog)
   {
     book2.print();
   }
   return 0;
 
-/*
+  // moveAll("Combat", catalog, cart);
 
-  moveAll("Combat", catalog, cart);
+  // std::cout << "\nBooks in cart after moveAll:" << std::endl;
+  // for (const auto &book : cart)
+  // {
+  //   std::cout << book.getTitle() << std::endl;
+  // }
 
-  std::cout << "\nBooks in cart after moveAll:" << std::endl;
-  for (const auto &book : cart)
-  {
-    std::cout << book.getTitle() << std::endl;
-  }
+  // for (const auto &book : cart)
+  // {
+  //   book.print();
+  // }
 
-  for(const auto &book : cart)
-  {
-    book.print();
-  }
-*/
   return 0;
-
 }
