@@ -1,7 +1,7 @@
 # CSCI_335
 Hunter College: CSCI 33500 [Software Analysis &amp; Design III]
 
-All of the three proojects I worked on while taking CSCI 335 at Hunter College during the Spring 2024 semester.
+All of the three projects I worked on while taking CSCI 335 at Hunter College during the Spring 2024 semester.
 ____________________________________________________________________________________________________________________________________________________________
 Project Description:
 
